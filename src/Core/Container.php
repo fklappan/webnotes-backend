@@ -16,11 +16,8 @@ class Container
 
     private $config = [];
 
-    private $version;
-
-    public function __construct($config, $version)
+    public function __construct($config)
     {
-        $this->version = $version;
         $this->config = $config;
         $this->instanceFactory = [
             "noteRepository" => function() {
@@ -33,7 +30,7 @@ class Container
                 return $this->createPdo();                
             },
             "noteController" => function() {
-                return new NoteController($this->make("noteRepository"), $this->version);
+                return new NoteController($this->make("noteRepository"));
             }
         ];
     }

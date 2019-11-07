@@ -7,36 +7,30 @@ use App\Core\AbstractController;
 class NoteController extends AbstractController
 {
     private $noteRepository;
-    private $version;
 
-    public function __construct(NoteRepository $noteRepository, $version)
+    public function __construct(NoteRepository $noteRepository)
     {
         $this->noteRepository = $noteRepository;
-        $this->version = $version;
     }
 
     public function index() 
     {
         $notes = $this->noteRepository->all();
         $this->render("note/index", [
-            "notes" => $notes,
-            "version" => $this->version
+            "notes" => $notes
         ]);
     }
 
     public function addNote() 
     {
-        $this->render("note/add", [
-            "version" => $this->version
-        ]);
+        $this->render("note/add", []);
     }
 
     public function showPost($id) 
     {
         $note = $this->noteRepository->find($id);
         $this->render("note/note", [
-            "note" => $note,
-            "version" => $this->version
+            "note" => $note
         ]);
     }
 
@@ -45,8 +39,7 @@ class NoteController extends AbstractController
         $id = $_GET["id"];
         $note = $this->noteRepository->find($id);
         $this->render("note/edit", [
-            "note" => $note,
-            "version" => $this->version
+            "note" => $note
         ]);
     }
 }
