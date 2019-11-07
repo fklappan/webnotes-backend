@@ -17,7 +17,7 @@ class NoteController extends AbstractController
 
     public function index() 
     {
-        $notes = $this->noteRepository->fetchNotes();
+        $notes = $this->noteRepository->all();
         $this->render("note/index", [
             "notes" => $notes,
             "version" => $this->version
@@ -33,7 +33,7 @@ class NoteController extends AbstractController
 
     public function showPost($id) 
     {
-        $note = $this->noteRepository->fetchNote($id);
+        $note = $this->noteRepository->find($id);
         $this->render("note/note", [
             "note" => $note,
             "version" => $this->version
@@ -43,7 +43,7 @@ class NoteController extends AbstractController
     public function editNote() 
     {
         $id = $_GET["id"];
-        $note = $this->noteRepository->fetchNote($id);
+        $note = $this->noteRepository->find($id);
         $this->render("note/edit", [
             "note" => $note,
             "version" => $this->version

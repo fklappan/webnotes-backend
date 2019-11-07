@@ -2,14 +2,13 @@
 
 namespace App\User;
 
-class UserModel
+use App\Core\AbstractModel;
+
+class UserModel extends AbstractModel
 {
     public $id;
     public $name;
     public $password;
-    
-
-
 }
 
 ?>

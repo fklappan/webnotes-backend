@@ -2,17 +2,21 @@
 
 namespace App\User;
 
+use App\Core\AbstractRepository;
 use PDO;
 
-class UserRepository 
+class UserRepository extends AbstractRepository
 {
-    private $pdo;
-
-    public function __construct(PDO $pdo) 
+    public function getTableName()
     {
-        $this->pdo = $pdo;
+        return "users";
     }
-        
+
+    public function getModelName()
+    {
+        return "App\\User\\UserModel";
+    }
+    
     function fetchUsers() 
     {
         $statement = $this->pdo->query("SELECT * FROM users");
@@ -34,30 +38,5 @@ class UserRepository
     {
         $statement = $this->pdo->prepare("INSERT INTO users (name, password) VALUES (?,?)");
         return $statement->execute([$user->name, $user->password]);
-    }
-
-    function saveNote() 
-    {
-        $user = new UserModel();
-        $user->name = $_POST["name"];
-        $user->password = $_POST["password"];
-        return $this->saveUserModel($user);
-    }
-
-    function updateNote() 
-    {
-        $note = new NoteModel();
-        $note->id = $_POST["id"];
-        $note->title = $_POST["title"];
-        $note->content = $_POST["content"];
-        $statement = $this->pdo->prepare("UPDATE notes SET title=?, content=? WHERE id =?");
-        $statement->execute([$note->title, $note->content, $note->id]);
-    }
-
-    function deleteNote() 
-    {
-        $id = $_GET["id"];
-        $statement = $this->pdo->prepare("DELETE FROM notes WHERE id = :id");
-        return $statement->execute(['id' => $id]);
     }
 }

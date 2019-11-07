@@ -2,14 +2,13 @@
 
 namespace App\Note;
 
-class NoteModel
+use App\Core\AbstractModel;
+
+class NoteModel extends AbstractModel
 {
     public $id;
     public $title;
     public $content;
-    
-
-
 }
 
 ?>

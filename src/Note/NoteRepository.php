@@ -2,32 +2,19 @@
 
 namespace App\Note;
 
+use App\Core\AbstractRepository;
 use PDO;
 
-class NoteRepository 
+class NoteRepository extends AbstractRepository
 {
-    private $pdo;
-
-    public function __construct(PDO $pdo) 
+    public function getTableName()
     {
-        $this->pdo = $pdo;
-    }
-        
-    function fetchNotes() 
-    {
-        $statement = $this->pdo->query("SELECT * FROM notes");
-        return $statement->fetchAll(PDO::FETCH_CLASS, "App\\Note\\NoteModel");
+        return "notes";
     }
 
-    function fetchNote($id) 
+    public function getModelName()
     {
-        $statement = $this->pdo->prepare("SELECT * FROM `notes` WHERE id = :id");
-        $statement->execute(['id' => $id]);
-
-        $statement->setFetchMode(PDO::FETCH_CLASS, "App\\Note\\NoteModel");
-        $note = $statement->fetch(PDO::FETCH_CLASS);
-
-        return $note;
+        return "App\\Note\\NoteModel";
     }
     
     function saveNoteModel(NoteModel $note)
