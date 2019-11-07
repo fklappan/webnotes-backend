@@ -1,3 +1,5 @@
+<?php include __DIR__ . "/../layout/header.php"; ?>
+
 <h1>Notiz bearbeiten</h1>
 <p class="lead">Bestehende Notiz bearbeiten</p>
 
@@ -14,3 +16,4 @@
   <button type="submit" class="btn btn-primary">Speichern</button>
 </form>
 
+<?php include __DIR__ . "/../layout/footer.php"; ?>

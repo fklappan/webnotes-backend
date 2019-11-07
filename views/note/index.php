@@ -1,3 +1,5 @@
+<?php include __DIR__ . "/../layout/header.php"; ?>
+
 <h1>Übersicht der Notizen</h1>
 <p class="lead">Hier sind alle Notizen hinterlegt</p>
 
@@ -21,3 +23,5 @@
 </div>
 <br>
 <?php endforeach ?>
+
+<?php include __DIR__ . "/../layout/footer.php"; ?>

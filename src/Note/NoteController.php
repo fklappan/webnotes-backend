@@ -2,7 +2,9 @@
 
 namespace App\Note;
 
-class NoteController 
+use App\Core\AbstractController;
+
+class NoteController extends AbstractController
 {
     private $noteRepository;
     private $version;
@@ -13,38 +15,28 @@ class NoteController
         $this->version = $version;
     }
 
-    protected function render($view, $params) 
-    {
-        // foreach ($params as $key => $value) {
-        //     // erstelle eine variable mit dem name $key (deswegen ${$key}) mit dem wert
-        //     ${$key} = $value;
-        // }
-        // -> PHP hat dafür die Methode extract() - macht den oben auskommentierten code
-        extract($params);
-        $version = $this->version;
-        include __DIR__ . "/../../views/layout/header.php";
-        include __DIR__ . "/../../views/{$view}.php";
-        include __DIR__ . "/../../views/layout/footer.php";
-    }
-
     public function index() 
     {
         $notes = $this->noteRepository->fetchNotes();
         $this->render("note/index", [
-            "notes" => $notes
+            "notes" => $notes,
+            "version" => $this->version
         ]);
     }
 
     public function addNote() 
     {
-        $this->render("note/add", []);
+        $this->render("note/add", [
+            "version" => $this->version
+        ]);
     }
 
     public function showPost($id) 
     {
         $note = $this->noteRepository->fetchNote($id);
         $this->render("note/note", [
-            "note" => $note
+            "note" => $note,
+            "version" => $this->version
         ]);
     }
 
@@ -53,7 +45,8 @@ class NoteController
         $id = $_GET["id"];
         $note = $this->noteRepository->fetchNote($id);
         $this->render("note/edit", [
-            "note" => $note
+            "note" => $note,
+            "version" => $this->version
         ]);
     }
 }
