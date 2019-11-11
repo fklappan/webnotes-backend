@@ -6,6 +6,8 @@ use PDO;
 use PDOException;
 use App\Note\NoteRepository;
 use App\Note\NoteController;
+use App\User\LoginController;
+use App\User\LoginService;
 use App\User\UserRepository;
 
 class Container  
@@ -30,7 +32,13 @@ class Container
                 return $this->createPdo();                
             },
             "noteController" => function() {
-                return new NoteController($this->make("noteRepository"));
+                return new NoteController($this->make("noteRepository"), $this->make("loginService"));
+            },
+            "loginController" => function() {
+                return new LoginController($this->make("loginService"));
+            },
+            "loginService" => function() {
+                return new LoginService($this->make("userRepository"));
             }
         ];
     }

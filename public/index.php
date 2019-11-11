@@ -1,4 +1,9 @@
 <?php
+
+use App\Core\NoAuthException;
+
+session_start();
+
 require __DIR__ . "/../init.php";
 
 $pathInfo = $_SERVER['PATH_INFO'];
@@ -28,17 +33,30 @@ $routes = [
         'controller' => 'noteRepository',
         'method' => 'deleteNote',
         'redirect' => 'index' ],
+    '/login' => [
+        'controller' => 'loginController',
+        'method' => 'login'
+        ],
+    '/logout' => [
+        'controller' => 'loginController',
+        'method' => 'logout'
+        ],     
     ];
 
 if (isset($routes[$pathInfo])) {
-    $route = $routes[$pathInfo];
-    $controller = $container->make($route['controller']);
-    $method = $route['method'];
-    $controller->$method();
-    if (isset($route['redirect'])) {
-        $target = $route['redirect'];
-        header("Location:$target");
+    try {
+        $route = $routes[$pathInfo];
+        $controller = $container->make($route['controller']);
+        $method = $route['method'];
+        $controller->$method();
+        if (isset($route['redirect'])) {
+            $target = $route['redirect'];
+            header("Location:$target");
+        }
+    } catch( NoAuthException $ex) {
+        header("Location: login");
     }
+    
 } else {
     echo "Unknown route";
 }
