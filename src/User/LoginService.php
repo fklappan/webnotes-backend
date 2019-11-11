@@ -42,11 +42,8 @@ class LoginService
     // refactored. 
     public function attemptRestService() 
     {
-        if (!isset(getallheaders()['user']) || !isset(getallheaders()['password'])) {
-            throw new NoAuthException("No user or password provided!");
-        }
-        $username = getallheaders()['user'];
-        $password = getallheaders()['password'];
+        $username = $_SERVER['HTTP_USER'];
+        $password = $_SERVER['HTTP_PASSWORD'];
         $this->genericAttempt($username, $password);
         $this->check();
     }
