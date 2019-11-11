@@ -1,5 +1,7 @@
 <?php
 include ("../../../init.php");
+$loginService = $container->make("loginService");
+$loginService->attemptRestService();
 $noteRepository = $container->make("noteRepository");
 $result = $noteRepository->updateNote();
 $result = true;

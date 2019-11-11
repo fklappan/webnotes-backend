@@ -1,9 +1,9 @@
 <?php
 include ("../../../init.php");
+$loginService = $container->make("loginService");
+$loginService->attemptRestService();
 $noteRepository = $container->make("noteRepository");
-//var_dump($_GET);
 $note = $noteRepository->find($_GET["id"]);
-//var_dump($note);
 header('Content-Type: application/json');
 echo json_encode($note);
 ?>
