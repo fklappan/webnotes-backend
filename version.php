@@ -1,2 +1,2 @@
 <?php
-$GLOBALS["version"] = "0.2 Alpha";
+$GLOBALS["version"] = "0.3 Alpha";
