@@ -1,10 +1,7 @@
 <?php include __DIR__ . "/../layout/header.php"; ?>
 
-<div class="center form-group">
-  <div class="center">
-    <h1>Notiz bearbeiten</h1>
-    <p class="lead">Bestehende Notiz bearbeiten</p>
-  </div>
+<h1>Notiz bearbeiten</h1>
+<p class="lead">Bestehende Notiz bearbeiten</p>
 
 <form action="editnote" method="post">
 <input type="hidden" name="id" value="<?php echo "{$note->id}"; ?>" />
@@ -16,9 +13,7 @@
     <label for="content">Notiz</label>
     <textarea class="form-control" id="content" rows="15" name="content"><?php echo "{$note->content}"; ?></textarea>
   </div>
-  <div class="form-group">
-    <button type="submit" class="button">Speichern</button>
-  </div>
+  <button type="submit" class="btn btn-primary">Speichern</button>
 </form>
 
 <?php include __DIR__ . "/../layout/footer.php"; ?>

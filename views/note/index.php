@@ -1,14 +1,27 @@
 <?php include __DIR__ . "/../layout/header.php"; ?>
-<div class="content-overview">
 
-    <?php foreach ($notes as $note) : ?>
-    <div class="overviewcard">
-        <p class="overviewcard__text overviewcard__caption"><?php echo $note->title; ?></p>
-        <p class="overviewcard__text overviewcard__description"><?php echo nl2br($note->content); ?></p>
-        <a href="edit?id=<?php echo $note->id; ?>" class="button">Edit Note</a> 
-        <a href="deletenote?id=<?php echo $note->id; ?>" class="button button-danger">Delete Note</a> 
+<h1>Übersicht der Notizen</h1>
+<p class="lead">Hier sind alle Notizen hinterlegt</p>
+
+<?php foreach ($notes as $note) : ?>
+<div class="col">
+    <div class="card w-95">
+        <div class="card-body">
+            <h4 class="card-title"><?php echo $note->title; ?></h4>
+            <p class="card-text"><?php echo nl2br($note->content); ?></p>
+            <!-- <a href="#" class="btn btn-outline-primary" onclick="changeState(this)">Favorit</a>-->
+            <div class ="row">
+                <a href="edit?id=<?php echo $note->id; ?>" class="btn btn-primary mx-3">Edit Note</a> 
+                <form method="post" action="deletenote?id=<?php echo $note->id; ?>">
+                    <input type="submit" class="btn btn-danger" value="Delete Note">
+                </form>
+            </div>
+            
+            <!-- <a href="deletenote?id=<?php echo $note->id; ?>" class="btn btn-danger">Delete Note</a> -->
+        </div>
     </div>
-    <?php endforeach ?>
 </div>
+<br>
+<?php endforeach ?>
 
 <?php include __DIR__ . "/../layout/footer.php"; ?>
