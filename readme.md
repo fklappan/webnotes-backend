@@ -1,3 +1,8 @@
+**Abandoned**
+
+This project is no longer maintained.
+
+
 # Webnotes Backend
 
 This is the PHP Server Backend for the Webnotes App.
